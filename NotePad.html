@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="NotePadCSS.css" />
+        <title>NotePad</title>
+    </head>
+    <body>
+            <div class="header">
+                <img src="./images/image2.jpg" alt="NotePad" style="width:100%;">
+            <div class="content">
+                <h1>My NotePad</h1>
+                <p>A NotePad created by me</p>
+            <div class="tab">
+                <button class="tabnote" onclick="openNote()">Format</button>
+            </div>
+            <div id="Format" class="tabcontent">
+                <input style="top:0px;" id="fontInput" type="search" class="userInput"><button id="fontSubmit" class="formatSubmit" onclick="font()" style="top:0px;">Set Font</button><br>
+                <input style="top:30px;" id="fontSizeInput" type="number" class="userInput"><button id="fontSizeSubmit" class="formatSubmit" onclick="fontSize()" style="top:30px;">Set Font Size</button><br> 
+                <input style="top:60px;" id="colorInput" type="color" class="userInput"><button id="colorSubmit" class="formatSubmit" onclick="color()" style="top:60px;">Set Text Color</button><br>
+                <input style="top:90px;" id="backgroundColorInput" type="color" class="userInput"><button id="backgroundColorSubmit" class="formatSubmit" onclick="backgroundColor()" style="top:90px;">Set Background Color</button>
+                <button id="reset" class="formatSubmit" onclick="reset()" style="top:120px;">Reset</button>
+            </div>
+                <p><textarea class="textareanoscroll" onkeyup="autoGrow(this);" autocorrect="on" id="text"></textarea></p>
+            </div>
+            </div>
+        <script src="NotePadJS.js"></script>
+    </body>
+</html>
+

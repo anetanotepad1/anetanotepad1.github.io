@@ -1,0 +1,184 @@
+.text-camp {
+    width: 100%;
+    font-family: Arial;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    min-height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-btns {
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px;
+}
+
+.text-camp span:focus {
+    outline: 0;
+}
+
+.text-camp span {
+    display: block;
+}
+
+.text-btns button {
+    border: 0;
+    height: 25px;
+    background-color: white;
+    width: 25px;
+    border-radius: 2.5px;
+    margin: 0 2.5px;
+}
+
+.text-btns select {
+    border: 0;
+    padding: 4px;
+    border-radius: 2.5px;
+}
+
+.text-area {
+    padding: 15px;
+    min-height: 100px;
+}
+
+.text-btns button.actived {
+    background-color: #62d6e3;
+}
+
+#text-value {
+    margin-top: 20px;
+    width: 0.1px;
+    heigth: 0.1px;
+    position: absolute;
+    opacity: 0;
+}
+
+.submit {
+    border: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#text-area {
+    margin-top: 20px;
+    width: 100%;
+}
+</style>
+<body>
+<!-- partial:index.partial.html -->
+<div class="text-camp">
+  <div class="text-btns">
+    <button class="text-btn-undo" onclick="commandEditorBtn('undo',true)">&#8617;</button>
+    <button class="text-btn-redo" onclick="commandEditorBtn('redo',true)"> &#8618;</button>
+    <select onchange="commandEditorSelect('fontname',value)">
+      <option value="Arial" selected>Arial</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Helvetica">Helvetica</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Brush Script MT">Brush Script MT</option>
+    </select>
+    <select onchange="commandEditorSelect('fontsize',value)">
+      <option value="1">Super pequeno</option>
+      <option value="2">Pequeno</option>
+      <option value="3" selected>Normal</option>
+      <option value="4">Grande</option>
+      <option value="5">Super Grande</option>
+    </select>
+    <button class="text-btn-justifyLeft" onclick="commandEditorBtn('justifyLeft')">L</button>
+    <button class="text-btn-justifyCenter" onclick="commandEditorBtn('justifyCenter')">C</button>
+    <button class="text-btn-justifyCenter" onclick="commandEditorBtn('justifyRight')">R</button>
+    <button class="text-btn-bold" onclick="commandEditorBtn('bold')">B</button>
+    <button class="text-btn-italic" onclick="commandEditorBtn('italic')">I</button>
+    <button class="text-btn-underline" onclick="commandEditorBtn('underline')">U</button>
+  </div>
+  <div class="text-area" onkeypress="updateValue()">
+    <span contenteditable></span>
+  </div>
+  <!-- Onde ficará armazenado o valor da edição do texto com os itens HTML -->
+  <input type="text" id="text-value">
+</div>
+
+<input type="text" id="text-area">
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+<script>
+var ctrlPress = false;
+$(document).ready(function () {
+    // Comming Soon
+});
+
+$(".text-area").click(function () {
+    $("button").removeClass("actived");
+});
+
+function commandEditorBtn(btn, click = false) {
+    document.execCommand(btn);
+    if (click == false) {
+        activedButton(btn);
+    }
+}
+
+function commandEditorSelect(command, val) {
+    document.execCommand(command, false, val);
+}
+
+function activedButton(btn) {
+    if ($(".text-btn-" + btn).hasClass("actived")) {
+        $(".text-btn-" + btn).removeClass("actived");
+    } else {
+        $(".text-btn-" + btn).addClass("actived");
+    }
+}
+
+$(".text-camp").click(function () {
+    var editor = $(".text-camp span");
+});
+
+$(document).keydown(function (e) {
+    if (e.which == 17) {
+        ctrlPress = true;
+    }
+    if (ctrlPress == true) {
+        if (e.which == 66) {
+            activedButton("bold", false);
+        }
+        if (e.which == 73) {
+            activedButton("italic", false);
+        }
+        if (e.which == 85) {
+            activedButton("underline", false);
+        }
+    }
+});
+
+$(document).keyup(function (e) {
+    if (e.which == 17) {
+        ctrlPress = false;
+    }
+});
+
+$(".text-area").click(function () {
+    $(".text-area span").focus();
+});
+
+$(".text-camp .text-area span").keyup(function () {
+    var text = $(this).html();
+    $("#text-area").val(text);
+});
+</script>
+
+<a target="_blank" href="http://www.htmlfreecode.com/" style="font-size: 8pt; text-decoration: none;font-family:Tahoma">HTML Free Code</a>
+
+
+<input type="color" ondblclick="document.getElementById('helloWorld').style.color = this.value">
+
+<p id="helloWorld">hello world</p>
